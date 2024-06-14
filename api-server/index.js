@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require("express");
+const history = require('connect-history-api-fallback');
 
 const app = express();
 
@@ -172,6 +173,9 @@ app.post('/api/cart', (req, res) =>
 );
 
 app.post('/api/sign-in', (req, res) => res.status(200).send());
+
+app.use(history({ index: '/index.html' }));
+app.use('/', express.static('dist', { index: 'index.html' }));
 
 app.use('/api/images', express.static('images'));
 
